@@ -3,5 +3,7 @@ A weather forcasting app allow you as a traveler to see the weather outlook for 
 
 
 ##### Project Repository:  [(http://github.com)](https://github.com/Zakaria1986/Weather_Forecast) 
-##### Project Repository:  [https://zakaria1986.github.io/Weather_Forecast/](https://zakaria1986.github.io/Weather_Forecast/) 
+##### Live page:  [https://zakaria1986.github.io/Weather_Forecast/](https://zakaria1986.github.io/Weather_Forecast/) 
+
+
 
