@@ -17,17 +17,38 @@ function getLocalStoredItems() {
   return HistorySearchKey;
 }
 
-
 function DOMCurrentWeather() {
+  var todaysDate = moment(new Date()).format("DD/MM/YYYY");
+  var weatherForToday = $('#today');
   $.get(currentWeather + `q=${searchKey}`)
     .then(currData => {
+
       var iconcode = currData.weather[0].icon;
       var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-      //$('#wicon').attr('src', iconurl);
 
       // lat and lon saved for forecast 
       var lat = currData.coord.lat;
       var lon = currData.coord.lon;
+
+      // use document.querySelector()  to get the current weather container '#today'
+      /*
+      // Write down the html 
+      <h5 class="card-title">London (12/01/2023)</h5>
+            <p>Temp: 13.0 oc</p>
+            <p>Wind: 17.05 kph</p>
+            <p>Humidity: 84%</p>
+      */
+
+      var currDOMoutPut = `    
+            <h5 class="card-title">${currData.name} (${todaysDate}) <img src='${iconurl}'></h5>
+            <p>Temp: ${Math.round(currData.main.temp)} &#xb0;C</p>
+            <p>Wind:  ${parseFloat(currData.wind.speed).toPrecision(2)} KPH</p>
+            <p>Humidity: ${Math.round(currData.main.humidity)}%</p>
+            `
+      weatherForToday.append(currDOMoutPut);
+
+      // append html into  today's weather section:  $( ".container" ).append( $( "h2" ) );
+
       console.log('current Latitude coords: ', lat);
       console.log('Current longetitude coords: ', lon);
 
@@ -38,7 +59,6 @@ function DOMCurrentWeather() {
       console.log('Current humidity: ', Math.round(currData.main.humidity) + "%");
       console.log('Todays date: ', moment(new Date()).format("DD/MM/YYYY"));
       console.log('Current weather icon: ', iconurl);
-
 
       // getForeCast();
     })
