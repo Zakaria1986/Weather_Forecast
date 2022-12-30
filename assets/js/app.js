@@ -17,27 +17,32 @@ function getLocalStoredItems() {
   return HistorySearchKey;
 }
 
-function featchCurrentWeather() {
+
+function DOMCurrentWeather() {
   $.get(currentWeather + `q=${searchKey}`)
     .then(currData => {
+      var iconcode = currData.weather[0].icon;
+      var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+      //$('#wicon').attr('src', iconurl);
+
+      // lat and lon saved for forecast 
+      var lat = currData.coord.lat;
+      var lon = currData.coord.lon;
+      console.log('current Latitude coords: ', lat);
+      console.log('Current longetitude coords: ', lon);
+
       console.log('Current weather: ', currData);
-      console.log('pressure: ', currData.main.pressure);
-      console.log('temp: ', Math.round(currData.main.temp));
-      console.log('Wind speed: ', Math.round(currData.wind.speed));
+      console.log('Search Location name : ', currData.name);
+      console.log('Current weather temp: ', Math.round(currData.main.temp));
+      console.log('Current Wind speed: ', Math.round(currData.wind.speed) + " KPH");
+      console.log('Current humidity: ', Math.round(currData.main.humidity) + "%");
+      console.log('Todays date: ', moment(new Date()).format("DD/MM/YYYY"));
+      console.log('Current weather icon: ', iconurl);
 
-      console.log('Name: ', currData.name);
-      console.log('Weather : ', currData.weather[0].description);
-      console.log('Main : ', currData.weather[0].main);
-      console.log('Icon : ', currData.weather[0].icon);
 
-      getForeCast()
-
-      // var iconcode = a.weather[0].icon;
-      // var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-      // $('#wicon').attr('src', iconurl);
+      // getForeCast();
     })
 }
-featchCurrentWeather();
 
 function getForeCast() {
   console.log('This is where the forecast is being printed')
@@ -51,3 +56,8 @@ function getForeCast() {
 
   })
 }
+
+function featchCurrentWeather() {
+  DOMCurrentWeather();
+}
+featchCurrentWeather();
