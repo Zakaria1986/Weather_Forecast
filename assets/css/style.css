@@ -1,0 +1,51 @@
+:root {
+    --light-grey: #c5c5c5;
+    --dark-blue: #0008ff;
+    --card-background: #3a546f;
+}
+
+input.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+}
+
+
+.sumbitbtn,
+button.btn {
+    width: 100%;
+    height: 40px;
+}
+
+.sumbitbtn {
+    margin-top: 10px;
+    background-color: var(--dark-blue);
+
+}
+
+/* ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+} */
+
+.list-group button {
+    background: var(--light-grey);
+    border: none;
+    margin-bottom: 3px;
+    padding: 10px;
+}
+
+section.currentWeather {
+    border: solid 1px;
+    padding: 10px;
+}
+
+h1.forecastheader {
+    padding: 10px 0 10px 0;
+}
+
+div.card {
+    background: var(--card-background);
+    color: var(--white);
+}
