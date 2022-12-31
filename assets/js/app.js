@@ -1,6 +1,14 @@
 
 // this will be Dynamic 
-var searchKey = 'London';
+var GetsearchKey = $("button.btn");
+GetsearchKey.click(function (e) {
+  e.preventDefault();
+  var userSearchInput = $("input#search-input").val();
+  // var weatherForToday = $('.currentWeather');
+
+  DOMCurrentWeather(userSearchInput);
+
+});
 
 // Weather API key, urls variables 
 var apiKey = '6e2c9a825d52912ed09435216f712368';
@@ -17,10 +25,10 @@ function getLocalStoredItems() {
   return HistorySearchKey;
 }
 
-function DOMCurrentWeather() {
+function DOMCurrentWeather(searchInput) {
   var todaysDate = moment(new Date()).format("DD/MM/YYYY");
   var weatherForToday = $('#today');
-  $.get(currentWeather + `q=${searchKey}`)
+  $.get(currentWeather + `q=${searchInput}`)
     .then(currData => {
 
       var iconcode = currData.weather[0].icon;
@@ -30,54 +38,57 @@ function DOMCurrentWeather() {
       var lat = currData.coord.lat;
       var lon = currData.coord.lon;
 
-      // use document.querySelector()  to get the current weather container '#today'
-      /*
-      // Write down the html 
-      <h5 class="card-title">London (12/01/2023)</h5>
-            <p>Temp: 13.0 oc</p>
-            <p>Wind: 17.05 kph</p>
-            <p>Humidity: 84%</p>
-      */
-
+      // HTML output for current weather section
       var currDOMoutPut = `    
             <h5 class="card-title">${currData.name} (${todaysDate}) <img src='${iconurl}'></h5>
-            <p>Temp: ${Math.round(currData.main.temp)} &#xb0;C</p>
+            <p>Temp: ${Math.round(currData.main.temp)}
+            <span>&#176;</span>C</p>
             <p>Wind:  ${parseFloat(currData.wind.speed).toPrecision(2)} KPH</p>
             <p>Humidity: ${Math.round(currData.main.humidity)}%</p>
             `
-      weatherForToday.append(currDOMoutPut);
-
       // append html into  today's weather section:  $( ".container" ).append( $( "h2" ) );
 
-      console.log('current Latitude coords: ', lat);
-      console.log('Current longetitude coords: ', lon);
+      // resetting the container before appending new search result
+      weatherForToday.text(" ");
+      weatherForToday.append(currDOMoutPut);
 
-      console.log('Current weather: ', currData);
-      console.log('Search Location name : ', currData.name);
-      console.log('Current weather temp: ', Math.round(currData.main.temp));
-      console.log('Current Wind speed: ', Math.round(currData.wind.speed) + " KPH");
-      console.log('Current humidity: ', Math.round(currData.main.humidity) + "%");
-      console.log('Todays date: ', moment(new Date()).format("DD/MM/YYYY"));
-      console.log('Current weather icon: ', iconurl);
-
-      // getForeCast();
+      getForeCast(lat, lon);
     })
 }
 
-function getForeCast() {
-  console.log('This is where the forecast is being printed')
-  $.get(forcast + `q=${searchKey}`).then(data => {
-    console.log(data);
-    console.log('Name: ', data.city.name);
-    console.log('humidity: ', data.list[0].main.humidity);
-    console.log('pressure: ', data.list[0].main.pressure);
-    console.log('temp: ', Math.round(data.list[0].main.temp));
-    console.log('Wind speed: ', Math.round(data.list[0].wind.speed));
+function getForeCast(lat, lon) {
 
+  var forecast = $('#forecast');
+  // emptying the container of previouse result
+  forecast.text(" ");
+  console.log('This is where the forecast is being printed')
+  $.get(forcast + `&lat=${lat}&lon=${lon}`).then(forecastData => {
+
+    // var foreCastIconCode = forecastData.weather[0].icon;
+    var iconurl = "http://openweathermap.org/img/w/";
+    var png = ".png";
+    console.log(forecastData);
+    forecastData.list.forEach(element => {
+      // console.log(element.dt_txt + ": Temp: " + iconurl + element.weather[0].icon + png + " Temp: " + element.main.temp + " Wind speed: " + element.wind.speed + " KPH  humidity " + element.main.humidity + "%");
+
+      var forecastCard = `<div class="card col-md-3 mr-3 mb-3">
+      <div class="card-body">
+        <h5 class="card-title">${element.dt_txt}</h5>
+        <img class ='cloudIcon' src="${iconurl + element.weather[0].icon + png}" class="card-img-top" alt="${element.weather[0].icon + png}">
+        <p class="card-text">Temp: ${element.main.temp} <span>&#176;</span>C</p>
+        <p class="card-text">Wind: ${element.wind.speed} KPH</p>
+        <p class="card-text">Humidity: ${element.main.humidity}%</p>
+      </div>
+    </div>`
+
+      // resetting the container before appending new search result
+
+      forecast.append(forecastCard);
+    })
   })
 }
 
-function featchCurrentWeather() {
-  DOMCurrentWeather();
-}
-featchCurrentWeather();
+// function featchCurrentWeather() {
+//   DOMCurrentWeather();
+// }
+// featchCurrentWeather();
