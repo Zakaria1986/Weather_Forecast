@@ -96,7 +96,6 @@ GetsearchKey.click(function (e) {
   // Checking to see if the key entered already exist if not add to the array
   if ((!existingLocalKey.includes(userSearchInput))) {
     existingLocalKey.push(userSearchInput);
-    seachHistory();
   }
   console.log(keyArray);
   storeItemsLocally(existingLocalKey);
