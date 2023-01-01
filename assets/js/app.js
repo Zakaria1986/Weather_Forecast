@@ -1,6 +1,9 @@
 
 // this will be Dynamic 
-var GetsearchKey = $("button.btn");
+var GetsearchKey = $("button");
+
+
+
 // Weather API key, urls variables 
 var apiKey = '6e2c9a825d52912ed09435216f712368';
 var baseUrl = 'https://api.openweathermap.org/data/2.5/';
@@ -12,8 +15,8 @@ console.log('Forecast current weather link: ', forcast);
 
 // Getting locally stored search keys if it exist if not create an empty array
 function getLocalStoredItems() {
-  var HistorySearchKey = JSON.parse(localStorage.getItem("SearchKey")) || [];
-  return HistorySearchKey;
+  var getStoredItem = JSON.parse(localStorage.getItem("SearchKey")) || [];
+  return getStoredItem;
 }
 
 function storeItemsLocally(searchItem) {
@@ -84,43 +87,62 @@ function getForeCast(lat, lon) {
     })
   })
 }
-
-var keyArray = [];
-GetsearchKey.click(function (e) {
+// Saving search location into local storange
+function storeHistorySearchKey(e) {
   e.preventDefault();
+
+  var clear_history = $('.list-group');
+
   var userSearchInput = $("input#search-input").val();
+  // Setting the first letter to uppercase
+  userSearchInput = userSearchInput.charAt(0).toUpperCase() + userSearchInput.slice(1);
+  console.log(userSearchInput);
+  var isTrue = userSearchInput.length > 0;
+  console.log(isTrue);
 
   // var weatherForToday = $('.currentWeather');
-  var existingLocalKey = getLocalStoredItems()
+  var existingLocalKey = getLocalStoredItems();
+  console.log(existingLocalKey);
 
   // Checking to see if the key entered already exist if not add to the array
-  if ((!existingLocalKey.includes(userSearchInput))) {
+  if ((!existingLocalKey.includes(userSearchInput)) && isTrue) {
     existingLocalKey.push(userSearchInput);
   }
-  console.log(keyArray);
+  // Passing the value to function below to store
   storeItemsLocally(existingLocalKey);
+
+  // Passing on the User search key to get the current weather etc. 
   DOMCurrentWeather(userSearchInput);
+  // $("input#search-input").text(" ");
+  clear_history.text(' ');
+  seachHistory();
 
-
-});
+}
+GetsearchKey.on('click', storeHistorySearchKey);
 
 // function gets the locally stored search history and out puts to the window 
-(function seachHistory() {
+function seachHistory() {
   var history = $("#history");
   var searchHisKey = getLocalStoredItems();
   searchHisKey.forEach(keyWord => {
     if (keyWord.length < 0) return;
-    var hisBtn = `<button>${keyWord}</button>`
+    var hisBtn = `<button class="btn-histSearchKey">${keyWord}</button>`
     history.append(hisBtn);
     console.log(keyWord);
-  })
-})()
-
+  });
+};
+seachHistory();
 
 // Write a function call UseHisKeyToSearch()
-  // Get history key by buttons
-    // var bnt = $("button");
-  // add an event listner
-    // $(this) key to get the clicked item
-    // pass it on to the search box to fetch weather details
+var history = $("#history");
+function UseHisKeyToSearch(e) {
+  e.preventDefault();
+  // $(this) key to get the clicked item
+  var btnVal = $(this).text();
+  console.log('His key pressed: ', btnVal);
+  // pass it on to the search box to fetch weather details
+  DOMCurrentWeather(btnVal);
+}
+$('button.btn-histSearchKey').on('click', UseHisKeyToSearch);
+
 
