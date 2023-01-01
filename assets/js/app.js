@@ -89,11 +89,18 @@ function getForeCast(lat, lon) {
 }
 // Saving search location into local storange
 function storeHistorySearchKey(e) {
+  if ($.trim($("input#search-input").val()) === "") {
+    e.preventDefault();
+    alert('Search box is empty, please enter your desired location?');
+    return;
+  }
   e.preventDefault();
 
   var clear_history = $('.list-group');
-
+  // Get search location from the input fiedl
   var userSearchInput = $("input#search-input").val();
+  console.log(userSearchInput);
+
   // Setting the first letter to uppercase
   userSearchInput = userSearchInput.charAt(0).toUpperCase() + userSearchInput.slice(1);
   console.log(userSearchInput);
@@ -118,7 +125,15 @@ function storeHistorySearchKey(e) {
   seachHistory();
 
 }
-GetsearchKey.on('click', storeHistorySearchKey);
+
+// $('#form').submit(function (e) {
+//   if ($.trim($("#email, #user_name").val()) === "") {
+//     e.preventDefault();
+//     alert('you did not fill out one of the fields');
+//   }
+// });
+
+$('#search-form').submit(storeHistorySearchKey);
 
 // function gets the locally stored search history and out puts to the window 
 function seachHistory() {
