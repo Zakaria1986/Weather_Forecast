@@ -1,9 +1,3 @@
-
-// this will be Dynamic 
-var GetsearchKey = $("button");
-
-
-
 // Weather API key, urls variables 
 var apiKey = '6e2c9a825d52912ed09435216f712368';
 var baseUrl = 'https://api.openweathermap.org/data/2.5/';
@@ -123,16 +117,9 @@ function storeHistorySearchKey(e) {
   // $("input#search-input").text(" ");
   clear_history.text(' ');
   seachHistory();
-
+  // I have no clue why this has to happen but if i din't it wont fetch the weather data after click the search box but now its working
+  $('button.btn-histSearchKey').click(UseHisKeyToSearch);
 }
-
-// $('#form').submit(function (e) {
-//   if ($.trim($("#email, #user_name").val()) === "") {
-//     e.preventDefault();
-//     alert('you did not fill out one of the fields');
-//   }
-// });
-
 $('#search-form').submit(storeHistorySearchKey);
 
 // function gets the locally stored search history and out puts to the window 
@@ -158,6 +145,6 @@ function UseHisKeyToSearch(e) {
   // pass it on to the search box to fetch weather details
   DOMCurrentWeather(btnVal);
 }
-$('button.btn-histSearchKey').on('click', UseHisKeyToSearch);
+$('button.btn-histSearchKey').click(UseHisKeyToSearch);
 
 
