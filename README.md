@@ -27,6 +27,16 @@ This weather dashboard allow you as a traveler to see the weather outlook for mu
 
   
 
+
+
 ![alt text](/assets/img/code_overview.gif)
 
 
+
+* Dashbaord take a user request 
+* User submits the request 
+    - Search key gets entered into local databaase 
+    - Then then API takes the request and gets the weather details and out puts on to the client browser
+* If search history exist
+    - user click the search key 
+    - Value gets passed on to the api and then get output inthe browser
