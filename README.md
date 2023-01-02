@@ -22,3 +22,11 @@ This weather dashboard allow you as a traveler to see the weather outlook for mu
  - Body has two section:
     - Currend day section at the top which shows the weather for current day 
     - Section bellow shows forecasting for the next 3 days in 3 hour interval 
+
+# Dashboard Business logic
+
+  
+
+![alt text](/assets/img/code_overview.gif)
+
+
