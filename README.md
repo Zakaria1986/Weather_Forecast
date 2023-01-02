@@ -39,4 +39,27 @@ This weather dashboard allow you as a traveler to see the weather outlook for mu
     - Then then API takes the request and gets the weather details and out puts on to the client browser
 * If search history exist
     - user click the search key 
-    - Value gets passed on to the api and then get output inthe browser
+    - Value gets passed on to the api and then the result returned gets rendered in the browser
+
+## The most satisfying bit of this project is the follow block of code: 
+
+    ** I was able to manipulate the date and time string to make the date and time more user friendly before outputting it to the borwser **
+
+> Line 67 - 69:  var dateTime = element.dt_txt; 
+
+      var time = dateTime.substring(10, dateTime.length - 3);
+      var date = dateTime.substring(0, dateTime.length - (time.length + 2));
+
+ ** Turn the first letter of the search upper case before passing it on to the api and saving it to the local storage **
+
+> Line 101: userSearchInput = userSearchInput.charAt(0).toUpperCase() + userSearchInput.slice(1); 
+
+ ** Finally checking to see if the key exist in the local storange before adding new key to keep the local database clean **
+
+ >Line 111:  if ((!existingLocalKey.includes(userSearchInput)) && isTrue) {
+
+    existingLocalKey.push(userSearchInput);
+
+  }
+
+<sub>Thank you for visiting and happy coding!</sub>
