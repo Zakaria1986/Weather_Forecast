@@ -43,18 +43,18 @@ This weather dashboard allow you as a traveler to see the weather outlook for mu
 
 ## The most satisfying bit of this project is the follow block of code: 
 
-    ** I was able to manipulate the date and time string to make the date and time more user friendly before outputting it to the borwser **
+    **I was able to manipulate the date and time string to make the date and time more user friendly before outputting it to the borwser**
 
 > Line 67 - 69:  var dateTime = element.dt_txt; 
 
       var time = dateTime.substring(10, dateTime.length - 3);
       var date = dateTime.substring(0, dateTime.length - (time.length + 2));
 
- ** Turn the first letter of the search upper case before passing it on to the api and saving it to the local storage **
+ **Turn the first letter of the search upper case before passing it on to the api and saving it to the local storage**
 
 > Line 101: userSearchInput = userSearchInput.charAt(0).toUpperCase() + userSearchInput.slice(1); 
 
- ** Finally checking to see if the key exist in the local storange before adding new key to keep the local database clean **
+ **Finally checking to see if the key exist in the local storange before adding new key to keep the local database clean**
 
  >Line 111:  if ((!existingLocalKey.includes(userSearchInput)) && isTrue) {
 
