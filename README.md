@@ -43,7 +43,8 @@ This weather dashboard allow you as a traveler to see the weather outlook for mu
 
 ## The most satisfying bit of this project is the follow block of code: 
 
-    **I was able to manipulate the date and time string to make the date and time more user friendly before outputting it to the borwser**
+ 
+ **I was able to manipulate the date and time string to make the date and time more user friendly before outputting it to the borwser**
 
 > Line 67 - 69:  var dateTime = element.dt_txt; 
 
