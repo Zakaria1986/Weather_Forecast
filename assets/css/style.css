@@ -1,7 +1,12 @@
 :root {
     --light-grey: #c5c5c5;
-    --dark-blue: #0008ff;
+    --dark-orange: #ee4f68;
     --card-background: #3a546f;
+    --header-background: #ee4f68 !important;
+}
+
+.weather-header {
+    background-color: var(--header-background);
 }
 
 input.form-input {
@@ -10,16 +15,18 @@ input.form-input {
     padding: 10px;
 }
 
-
 .sumbitbtn,
 button.btn {
     width: 100%;
     height: 40px;
+    background-color: var(--dark-orange);
+    border: solid 1px var(--dark-orange);
+    color: var(--white);
 }
 
 .sumbitbtn {
     margin-top: 10px;
-    background-color: var(--dark-blue);
+    background-color: var(--dark-orange);
 
 }
 
@@ -43,6 +50,7 @@ section.currentWeather {
 
 h1.forecastheader {
     padding: 10px 0 10px 0;
+    color: var(--dark-orange);
 
 }
 

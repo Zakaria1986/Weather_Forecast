@@ -130,7 +130,6 @@ function seachHistory() {
     if (keyWord.length < 0) return;
     var hisBtn = `<button class="btn-histSearchKey">${keyWord}</button>`
     history.append(hisBtn);
-    console.log(keyWord);
   });
 };
 seachHistory();
@@ -141,7 +140,6 @@ function UseHisKeyToSearch(e) {
   e.preventDefault();
   // $(this) key to get the clicked item
   var btnVal = $(this).text();
-  console.log('His key pressed: ', btnVal);
   // pass it on to the search box to fetch weather details
   DOMCurrentWeather(btnVal);
 }
