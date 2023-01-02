@@ -66,9 +66,14 @@ function getForeCast(lat, lon) {
     forecastData.list.forEach(element => {
       // console.log(element.dt_txt + ": Temp: " + iconurl + element.weather[0].icon + png + " Temp: " + element.main.temp + " Wind speed: " + element.wind.speed + " KPH  humidity " + element.main.humidity + "%");
 
+      // Breaking the time and date 
+      var dateTime = element.dt_txt;
+      var time = dateTime.substring(10, dateTime.length - 3);
+      var date = dateTime.substring(0, dateTime.length - (time.length + 2));
+      // Building html for the client site
       var forecastCard = `<div class="card col-md-3 mr-3 mb-3">
       <div class="card-body">
-        <h5 class="card-title">${element.dt_txt}</h5>
+        <h5 class="card-title">${date}<span class='timeStyle'>${time}</span></h5>
         <img class ='cloudIcon' src="${iconurl + element.weather[0].icon + png}" class="card-img-top" alt="${element.weather[0].icon + png}">
         <p class="card-text">Temp: ${element.main.temp} <span>&#176;</span>C</p>
         <p class="card-text">Wind: ${element.wind.speed} KPH</p>

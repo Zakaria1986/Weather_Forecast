@@ -63,6 +63,10 @@ div.card {
     width: 60px;
 }
 
+.timeStyle {
+    color: var(--dark-orange);
+}
+
 
 @media (min-width: 768px) {
     .col-md-3 {
